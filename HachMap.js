@@ -1,3 +1,5 @@
+import { LinkedList } from "./LinkedList.js";
+
 class HashMap {
     buckets = new Array(16);
     
@@ -25,7 +27,6 @@ class HashMap {
         } else {
             if(this.buckets[index].key == key) {
                 // the key is already exist!
-                this.buckets[index].value = value ;
             } else {
                 // collision
             }
@@ -39,7 +40,12 @@ const myHash = new HashMap();
 console.log(myHash.set('john', 1));
 console.log(myHash.set('john', 2));
 console.log(myHash.set('john', 2));
-// console.log(myHash.set('john', 1));
+
+
+const test = new LinkedList()
+test.append({key : 2, value : "good "});
+
+console.log(test.head.obj.value)
 
 
 
