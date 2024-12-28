@@ -23,12 +23,20 @@ class HashMap {
     set(key, value) {
         const index = this.hash(key);
         if(!this.buckets[index]) {
-            this.buckets[index] = { key , value };
+            const bucket = new LinkedList();
+            bucket.append( {key, value} );
+            this.buckets[index] = bucket;
         } else {
-            if(this.buckets[index].key == key) {
-                // the key is already exist!
+            const myList = this.buckets[index];
+            const myObj = myList.head.obj; 
+            if(myObj.key == key) {
+                // the key is already exist! so Update it
+                myObj.value = value;
+                this.buckets[index].head.obj = myObj;
+                console.log(this.buckets[index].head.obj);
             } else {
-                // collision
+                // handle collisions with linked lists
+                myList.append( {key, value} )
             }
         }
     }
@@ -38,14 +46,13 @@ class HashMap {
 
 const myHash = new HashMap();
 console.log(myHash.set('john', 1));
-console.log(myHash.set('john', 2));
-console.log(myHash.set('john', 2));
+console.log(myHash.set('john', 2));// hash  = 11
+console.log(myHash.set('k', 2));// hash  = 11
+
+console.log(myHash.buckets[11])
 
 
-const test = new LinkedList()
-test.append({key : 2, value : "good "});
 
-console.log(test.head.obj.value)
 
 
 
