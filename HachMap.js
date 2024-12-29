@@ -103,6 +103,16 @@ class HashMap {
         this.storedKeys = 0;
     }
 
+    keys() {
+        let arr = [];
+        this.buckets.forEach((bucket) => {
+            if(bucket) {
+                arr = arr.concat(bucket.getArrayOfKeys(bucket.head));
+            }
+        })
+        return arr;
+    }
+
 }
 
 
@@ -112,13 +122,10 @@ myHash.set('john', 1);
 myHash.set('john', 2);// hash  = 11
 myHash.set('k', 2);// hash  = 11
 myHash.set('how', 2);// hash  = 11
-myHash.remove('how');// hash  = 11
 
 console.log(myHash.length())
 
-myHash.clear();
-console.log(myHash.length())
-
+console.log(myHash.keys())
 
 
 
