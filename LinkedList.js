@@ -18,7 +18,23 @@ class LinkedList {
         }
     }
 
+    getValue(key) {
+        if(this.head == null) {
+            return null;
+        } else {
+            let node = this.head ;
+            while(node != null) {
+                if(node.obj.key == key) {
+                    return node.obj.value;
+                }
+                node = node.nextNode;
+            }
+            return null;
+        }
+    }   
+
 }
+
 
 class Node {
     constructor() {
@@ -26,6 +42,15 @@ class Node {
         this.nextNode = null;
     }
 }
+
+//  for test
+const linked = new LinkedList();
+linked.append({key: 'j', value : 1})
+linked.append({key: 'h', value : 2})
+linked.append({key: 'bb', value : 3})
+
+
+console.log(linked.getValue('not'))
 
 export { LinkedList }
 
