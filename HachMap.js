@@ -55,14 +55,30 @@ class HashMap {
         }
     }
 
+    has(key) {
+        const index = this.hash(key);
+        if(!this.buckets[index]) {
+            return false;
+        } else {
+            const myList = this.buckets[index];
+            const head = myList.head;
+            if(head.obj.key == key) {
+                return true;
+            } else {
+                return !!myList.getValue(key);
+            }
+        }
+    }
+
 }
 
 
 const myHash = new HashMap();
 myHash.set('john', 1);
 myHash.set('john', 2);// hash  = 11
+myHash.set('k', 2);// hash  = 11
 
-console.log(myHash.get('john'))
+console.log(myHash.get('k'))
 
 
 
