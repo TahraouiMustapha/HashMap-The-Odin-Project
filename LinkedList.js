@@ -33,6 +33,29 @@ class LinkedList {
         }
     }   
 
+    remove(key) {
+        if(this.head == null) {
+            return false;
+        } else {
+            if(this.head.obj.key == key) {
+                this.head = this.head.nextNode;
+                return true;
+            }
+            let node = this.head.nextNode;
+            let previous = this.head;
+            while(node != null) {
+                if(node.obj.key == key) {
+                    previous.nextNode = node.nextNode;
+                    return true;
+                }
+                previous = node;
+                node = node.nextNode;
+            }
+
+            return false;
+        }
+    }
+
 }
 
 

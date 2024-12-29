@@ -42,7 +42,7 @@ class HashMap {
 
     get(key) {
         const index = this.hash(key);
-        if(!this.buckets[index]) {
+        if(!this.buckets[index] || !this.buckets[index].head) {
             return null;
         } else {
             const myList = this.buckets[index];
@@ -70,15 +70,24 @@ class HashMap {
         }
     }
 
+    remove(key) {
+        const index = this.hash(key);
+        if(!this.buckets[index]) {
+            return false;
+        } else {
+            return this.buckets[index].remove(key);// remove method in linkedList
+        }
+    }
+
 }
 
 
 const myHash = new HashMap();
+myHash.set('rabi3a', 17);
 myHash.set('john', 1);
 myHash.set('john', 2);// hash  = 11
 myHash.set('k', 2);// hash  = 11
 
-console.log(myHash.get('k'))
 
 
 
