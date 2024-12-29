@@ -12,9 +12,19 @@ class LinkedList {
         } else {
             let loopNode = this.head;
             while( loopNode.nextNode != null ) {
+                if(loopNode.obj.key == obj.key) {
+                    loopNode.obj.value = obj.value;
+                    return false;
+                }
                 loopNode = loopNode.nextNode;
             } 
+            // to check the last node 
+            if(loopNode.obj.key == obj.key) {
+                loopNode.obj.value = obj.value;
+                return false;
+            }
             loopNode.nextNode = node;
+            return true;
         }
     }
 

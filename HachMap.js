@@ -23,6 +23,10 @@ class HashMap {
 
     set(key, value) {
         const index = this.hash(key);
+        if (index < 0 || index >= this.buckets.length) {
+            throw new Error("Trying to access index out of bounds");
+        }
+
         if(!this.buckets[index]) {
             const bucket = new LinkedList();
             bucket.append( {key, value} );
@@ -38,9 +42,9 @@ class HashMap {
                 this.buckets[index].head.obj = myObj;
             } else {
                 // handle collisions with linked lists
-                myList.append( {key, value} )
+                const addSuccess = myList.append( {key, value} );
                 // add a new key , stored keys +1
-                this.storedKeys += 1;
+                if(addSuccess) this.storedKeys += 1;
             }
         }
 
@@ -48,6 +52,10 @@ class HashMap {
 
     get(key) {
         const index = this.hash(key);
+        if (index < 0 || index >= this.buckets.length) {
+            throw new Error("Trying to access index out of bounds");
+        }
+          
         if(!this.buckets[index] || !this.buckets[index].head) {
             return null;
         } else {
@@ -63,6 +71,10 @@ class HashMap {
 
     has(key) {
         const index = this.hash(key);
+        if (index < 0 || index >= this.buckets.length) {
+            throw new Error("Trying to access index out of bounds");
+        }
+          
         if(!this.buckets[index]) {
             return false;
         } else {
@@ -78,6 +90,10 @@ class HashMap {
 
     remove(key) {
         const index = this.hash(key);
+        if (index < 0 || index >= this.buckets.length) {
+            throw new Error("Trying to access index out of bounds");
+        }
+          
         if(!this.buckets[index]) {
             return false;
         } else {
@@ -135,7 +151,7 @@ class HashMap {
 
 }
 
-
+export { HashMap }
 
 
 
