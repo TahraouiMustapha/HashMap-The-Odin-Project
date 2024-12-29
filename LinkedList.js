@@ -70,6 +70,13 @@ class LinkedList {
         return [];
     }
 
+    getEntries(node) {
+        if(node != null) {
+            return [node.toArray()].concat(this.getEntries(node.nextNode));
+        }
+        return [];
+    }
+
 }
 
 
@@ -77,6 +84,10 @@ class Node {
     constructor() {
         this.obj = null;
         this.nextNode = null;
+    }
+
+    toArray() {
+        return [this.obj.key, this.obj.value];
     }
 }
 

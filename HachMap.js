@@ -123,20 +123,18 @@ class HashMap {
         return arr;
     }
 
+    entries() {
+        let arr = [];
+        this.buckets.forEach((bucket) => {
+            if(bucket) {
+                arr = arr.concat(bucket.getEntries(bucket.head));
+            }
+        })
+        return arr;
+    }
+
 }
 
-
-const myHash = new HashMap();
-myHash.set('rabi3a', 17);
-myHash.set('john', 1);
-myHash.set('john', 2);// hash  = 11
-myHash.set('k', 2);// hash  = 11
-myHash.set('how', 2);// hash  = 11
-
-console.log(myHash.length())
-
-console.log(myHash.keys())
-console.log(myHash.values())
 
 
 
