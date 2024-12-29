@@ -94,6 +94,15 @@ class HashMap {
         return this.storedKeys;
     }
 
+    clear() {
+        this.buckets.forEach((bucket) => {
+            if(bucket) {
+                bucket.head = null;
+            }
+        })
+        this.storedKeys = 0;
+    }
+
 }
 
 
@@ -106,6 +115,10 @@ myHash.set('how', 2);// hash  = 11
 myHash.remove('how');// hash  = 11
 
 console.log(myHash.length())
+
+myHash.clear();
+console.log(myHash.length())
+
 
 
 
