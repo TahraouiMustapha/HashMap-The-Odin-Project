@@ -2,6 +2,7 @@ import { LinkedList } from "./LinkedList.js";
 
 class HashMap {
     buckets = new Array(16);
+    storedKeys = 0;
     
     constructor() {
         this.loadFactor = 0.75;
@@ -25,6 +26,8 @@ class HashMap {
         if(!this.buckets[index]) {
             const bucket = new LinkedList();
             bucket.append( {key, value} );
+            // add a new key , stored keys +1
+            this.storedKeys += 1;
             this.buckets[index] = bucket;
         } else {
             const myList = this.buckets[index];
@@ -36,8 +39,11 @@ class HashMap {
             } else {
                 // handle collisions with linked lists
                 myList.append( {key, value} )
+                // add a new key , stored keys +1
+                this.storedKeys += 1;
             }
         }
+
     }
 
     get(key) {
@@ -75,8 +81,17 @@ class HashMap {
         if(!this.buckets[index]) {
             return false;
         } else {
-            return this.buckets[index].remove(key);// remove method in linkedList
+            const result = this.buckets[index].remove(key);// remove method in linkedList
+            if (result) {
+                // succesful removed an entry with that key
+                this.storedKeys -= 1;
+            }
+            return result;
         }
+    }
+
+    length() {
+        return this.storedKeys;
     }
 
 }
@@ -87,6 +102,10 @@ myHash.set('rabi3a', 17);
 myHash.set('john', 1);
 myHash.set('john', 2);// hash  = 11
 myHash.set('k', 2);// hash  = 11
+myHash.set('how', 2);// hash  = 11
+myHash.remove('how');// hash  = 11
+
+console.log(myHash.length())
 
 
 
