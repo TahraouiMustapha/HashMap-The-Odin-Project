@@ -56,9 +56,16 @@ class LinkedList {
         }
     }
 
-    getArrayOfKeys(node = null) {
+    getArrayOfKeys(node) {
         if(node != null) {
             return [node.obj.key].concat(this.getArrayOfKeys(node.nextNode));
+        }
+        return [];
+    }
+
+    getArrayOfValues(node) {
+        if(node != null) {
+            return [node.obj.value].concat(this.getArrayOfValues(node.nextNode));
         }
         return [];
     }

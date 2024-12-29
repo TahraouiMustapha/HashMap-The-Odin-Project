@@ -113,6 +113,16 @@ class HashMap {
         return arr;
     }
 
+    values() {
+        let arr = [];
+        this.buckets.forEach((bucket) => {
+            if(bucket) {
+                arr = arr.concat(bucket.getArrayOfValues(bucket.head));
+            }
+        })
+        return arr;
+    }
+
 }
 
 
@@ -126,6 +136,7 @@ myHash.set('how', 2);// hash  = 11
 console.log(myHash.length())
 
 console.log(myHash.keys())
+console.log(myHash.values())
 
 
 
