@@ -33,10 +33,24 @@ class HashMap {
                 // the key is already exist! so Update it
                 myObj.value = value;
                 this.buckets[index].head.obj = myObj;
-                console.log(this.buckets[index].head.obj);
             } else {
                 // handle collisions with linked lists
                 myList.append( {key, value} )
+            }
+        }
+    }
+
+    get(key) {
+        const index = this.hash(key);
+        if(!this.buckets[index]) {
+            return null;
+        } else {
+            const myList = this.buckets[index];
+            const head = myList.head;
+            if(head.obj.key == key) {
+                return head.obj.value;
+            } else {
+                return myList.getValue(key);
             }
         }
     }
@@ -45,11 +59,10 @@ class HashMap {
 
 
 const myHash = new HashMap();
-console.log(myHash.set('john', 1));
-console.log(myHash.set('john', 2));// hash  = 11
-console.log(myHash.set('k', 2));// hash  = 11
+myHash.set('john', 1);
+myHash.set('john', 2);// hash  = 11
 
-console.log(myHash.buckets[11])
+console.log(myHash.get('john'))
 
 
 

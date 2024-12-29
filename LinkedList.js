@@ -43,14 +43,5 @@ class Node {
     }
 }
 
-//  for test
-const linked = new LinkedList();
-linked.append({key: 'j', value : 1})
-linked.append({key: 'h', value : 2})
-linked.append({key: 'bb', value : 3})
-
-
-console.log(linked.getValue('not'))
-
 export { LinkedList }
 
