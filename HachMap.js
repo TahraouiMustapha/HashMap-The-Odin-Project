@@ -1,10 +1,10 @@
 import { LinkedList } from "./LinkedList.js";
 
 class HashMap {
-    buckets = new Array(16);
-    storedKeys = 0;
     
     constructor() {
+        this.buckets = new Array(16);
+        this.storedKeys = 0;
         this.loadFactor = 0.75;
         this.capacity = this.buckets.length;
     }
@@ -21,6 +21,22 @@ class HashMap {
         return hashCode;
     } 
 
+    checkTimeToGrowth() {
+        return this.storedKeys > (this.loadFactor * this.capacity);
+    }
+
+    growth() {
+        let newBuckets = new Array(this.capacity * 2);
+        const myEntries = this.entries();
+        this.buckets = newBuckets;
+        this.capacity = this.buckets.length;
+        this.storedKeys = 0;
+        
+        myEntries.forEach((pair) => {
+            this.set(pair[0], pair[1]);
+        })
+    }
+
     set(key, value) {
         const index = this.hash(key);
         if (index < 0 || index >= this.buckets.length) {
@@ -33,6 +49,10 @@ class HashMap {
             // add a new key , stored keys +1
             this.storedKeys += 1;
             this.buckets[index] = bucket;
+            // check the growth's time
+            if(this.checkTimeToGrowth()) {
+                this.growth();
+            }
         } else {
             const myList = this.buckets[index];
             const myObj = myList.head.obj; 
@@ -45,6 +65,9 @@ class HashMap {
                 const addSuccess = myList.append( {key, value} );
                 // add a new key , stored keys +1
                 if(addSuccess) this.storedKeys += 1;
+                if(this.checkTimeToGrowth()) {
+                    this.growth();
+                }
             }
         }
 

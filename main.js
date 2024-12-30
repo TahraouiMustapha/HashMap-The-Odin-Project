@@ -16,6 +16,17 @@ test.set('jacket', 'blue')
 test.set('kite', 'pink')
 test.set('lion', 'golden')
 
+console.log(test.capacity)
+console.log(test.buckets.length)
+test.set('moon', 'silver')
+test.set('moon', 'silv')
+test.set('lion', 'gg')
+
+
+console.log(test.capacity)
+console.log(test.buckets.length)
+
+
 
 console.log(test.length())
 console.log(test.entries())
