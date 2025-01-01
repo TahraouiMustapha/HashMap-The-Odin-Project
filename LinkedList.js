@@ -11,19 +11,17 @@ class LinkedList {
             this.head = node;
         } else {
             let loopNode = this.head;
-            while( loopNode.nextNode != null ) {
+            let previousNode =  loopNode;
+            while( loopNode != null ) {
                 if(loopNode.obj.key == obj.key) {
                     loopNode.obj.value = obj.value;
                     return false;
                 }
+                previousNode = loopNode;
                 loopNode = loopNode.nextNode;
             } 
-            // to check the last node 
-            if(loopNode.obj.key == obj.key) {
-                loopNode.obj.value = obj.value;
-                return false;
-            }
-            loopNode.nextNode = node;
+
+            previousNode.nextNode = node;
             return true;
         }
     }
