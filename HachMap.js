@@ -26,9 +26,8 @@ class HashMap {
     }
 
     growth() {
-        let newBuckets = new Array(this.capacity * 2);
         const myEntries = this.entries();
-        this.buckets = newBuckets;
+        this.buckets = new Array(this.capacity * 2);;
         this.capacity = this.buckets.length;
         this.storedKeys = 0;
         
@@ -55,19 +54,11 @@ class HashMap {
             }
         } else {
             const myList = this.buckets[index];
-            const myObj = myList.head.obj; 
-            if(myObj.key == key) {
-                // the key is already exist! so Update it
-                myObj.value = value;
-                this.buckets[index].head.obj = myObj;
-            } else {
-                // handle collisions with linked lists
-                const addSuccess = myList.append( {key, value} );
-                // add a new key , stored keys +1
-                if(addSuccess) this.storedKeys += 1;
-                if(this.checkTimeToGrowth()) {
-                    this.growth();
-                }
+            const addSuccess = myList.append( {key, value} );
+            // add a new key , stored keys +1
+            if(addSuccess) this.storedKeys += 1;
+            if(this.checkTimeToGrowth()) {
+                this.growth();
             }
         }
 
@@ -82,13 +73,7 @@ class HashMap {
         if(!this.buckets[index] || !this.buckets[index].head) {
             return null;
         } else {
-            const myList = this.buckets[index];
-            const head = myList.head;
-            if(head.obj.key == key) {
-                return head.obj.value;
-            } else {
-                return myList.getValue(key);
-            }
+            return this.buckets[index].getValue(key);
         }
     }
 
@@ -101,13 +86,7 @@ class HashMap {
         if(!this.buckets[index]) {
             return false;
         } else {
-            const myList = this.buckets[index];
-            const head = myList.head;
-            if(head.obj.key == key) {
-                return true;
-            } else {
-                return !!myList.getValue(key);
-            }
+            return !!this.buckets[index].getValue(key);   
         }
     }
 
